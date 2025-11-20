@@ -9,11 +9,11 @@ COPY build.gradle settings.gradle ./
 # Upgrade Gradle to 9.1.0 which fully supports Java 25
 RUN ./gradlew wrapper --gradle-version=9.1.0 --no-daemon
 
-# Download dependencies (cached layer)
-RUN ./gradlew dependencies --no-daemon
-
 # Copy source code
 COPY src ./src
+
+# Download dependencies (cached layer)
+RUN ./gradlew dependencies --no-daemon
 
 EXPOSE 8080
 
