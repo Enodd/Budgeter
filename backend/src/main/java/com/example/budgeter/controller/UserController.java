@@ -12,9 +12,4 @@ public class UserController {
     String sayHello() {
         return "Pasta la vista";
     }
-
-    @GetMapping("/tomato")
-    String tomato() {
-        return "tomato";
-    }
 }
