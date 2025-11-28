@@ -1,9 +1,6 @@
 package com.example.budgeter.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -11,6 +8,8 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -36,5 +35,12 @@ public class Budget {
 
     @Column(name = "total_limit", precision = 12, scale = 2)
     private BigDecimal totalLimit;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_user")
+    private User idUser;
+
+    @OneToMany(mappedBy = "budget")
+    private Set<BudgetCategory> budgetCategories = new LinkedHashSet<>();
 
 }

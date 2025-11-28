@@ -8,6 +8,8 @@ import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -40,5 +42,11 @@ public class BudgetCategory {
     @Size(max = 7)
     @Column(name = "color", length = 7)
     private String color;
+
+    @OneToMany(mappedBy = "budgetCategory")
+    private Set<RecurringTransaction> recurringTransactions = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "budgetCategory")
+    private Set<Transaction> transactions = new LinkedHashSet<>();
 
 }

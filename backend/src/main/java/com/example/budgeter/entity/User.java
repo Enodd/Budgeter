@@ -1,15 +1,15 @@
 package com.example.budgeter.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.example.budgeter.enums.Role;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -27,7 +27,7 @@ public class User {
 
     @Size(max = 40)
     @NotNull
-    @Column(name = "mail", nullable = false, length = 40)
+    @Column(unique = true, name = "mail", nullable = false, length = 40)
     private String mail;
 
     @Size(max = 40)
@@ -42,5 +42,17 @@ public class User {
     @NotNull
     @Column(name = "dateofbirth", nullable = false)
     private LocalDate dateofbirth;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    private Role role;
+
+    @OneToMany
+    @JoinColumn(name = "id_user")
+    private Set<Budget> budgets = new LinkedHashSet<>();
+
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private Set<FinancialGoal> financialGoals = new LinkedHashSet<>();
 
 }
