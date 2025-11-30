@@ -1,7 +1,9 @@
 package com.example.budgeter.dto.auth;
 
 public record AuthResponse(
-        String token,
-        String email
+        String accessToken,
+        String refreshToken,
+        String email,
+        long expiresIn
 ) {
 }

@@ -2,6 +2,7 @@ package com.example.budgeter.controller;
 
 import com.example.budgeter.dto.auth.AuthResponse;
 import com.example.budgeter.dto.auth.LoginRequest;
+import com.example.budgeter.dto.auth.RefreshTokenRequest;
 import com.example.budgeter.dto.auth.RegisterRequest;
 import com.example.budgeter.service.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-// TODO: add jwt.secret and jwt.expiration (ms)
 public class AuthorizationController {
 
     private final AuthService authService;
@@ -26,5 +26,10 @@ public class AuthorizationController {
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
         return ResponseEntity.ok(authService.login(request));
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<AuthResponse> refresh(@RequestBody RefreshTokenRequest request) {
+        return ResponseEntity.ok(authService.refreshToken(request.refreshToken()));
     }
 }

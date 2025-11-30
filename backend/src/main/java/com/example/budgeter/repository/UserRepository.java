@@ -1,7 +1,7 @@
 package com.example.budgeter.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.budgeter.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 

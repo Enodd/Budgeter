@@ -6,8 +6,10 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -27,7 +29,7 @@ public class User {
 
     @Size(max = 40)
     @NotNull
-    @Column(unique = true, name = "mail", nullable = false, length = 40)
+    @Column(name = "mail", nullable = false, length = 40)
     private String mail;
 
     @Size(max = 40)
@@ -43,9 +45,17 @@ public class User {
     @Column(name = "dateofbirth", nullable = false)
     private LocalDate dateofbirth;
 
-    @Enumerated(EnumType.STRING)
+    @Size(max = 255)
+    @NotNull
+    @ColumnDefault("'USER'")
     @Column(name = "role", nullable = false)
     private Role role;
+
+    @Column(name = "refreshtoken", length = Integer.MAX_VALUE)
+    private String refreshtoken;
+
+    @Column(name = "refreshtokenexpirydate")
+    private LocalDateTime refreshtokenexpirydate;
 
     @OneToMany
     @JoinColumn(name = "id_user")

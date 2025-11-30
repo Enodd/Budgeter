@@ -7,13 +7,14 @@ import com.example.budgeter.entity.User;
 import com.example.budgeter.enums.Role;
 import com.example.budgeter.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.TreeSet;
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +23,9 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+
+    @Value("${jwt.access-token-expiration}")
+    private long accessTokenExpiration;
 
     public AuthResponse register(RegisterRequest request) {
         if (userRepository.existsByMail(request.mail())) {
@@ -42,9 +46,10 @@ public class AuthService {
                 .password(user.getPassword())
                 .authorities(user.getRole().name())
                 .build();
-        String token = jwtService.generateToken(userDetails);
+        String accessToken = jwtService.generateAccessToken(userDetails);
+        String refreshToken = jwtService.generateRefreshToken(userDetails);
 
-        return new AuthResponse(token, user.getMail());
+        return new AuthResponse(accessToken, refreshToken, user.getMail(), accessTokenExpiration);
     }
 
     public AuthResponse login(LoginRequest request) {
@@ -63,8 +68,46 @@ public class AuthService {
                 .authorities(user.getRole().name())
                 .build();
 
-        String jwtToken = jwtService.generateToken(userDetails);
+        String accessToken = jwtService.generateAccessToken(userDetails);
+        String refreshToken = jwtService.generateRefreshToken(userDetails);
 
-        return new AuthResponse(jwtToken, user.getMail());
+        user.setRefreshtoken(refreshToken);
+        user.setRefreshtokenexpirydate(LocalDateTime.now().plusDays(7));
+
+        return new AuthResponse(accessToken, refreshToken, user.getMail(), accessTokenExpiration / 1000);
+    }
+
+    public AuthResponse refreshToken(String refreshToken) {
+        String mail = jwtService.extractUsername(refreshToken);
+        User user = userRepository
+                .findByMail(mail)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (!refreshToken.equals(user.getRefreshtoken())) {
+            throw new RuntimeException("Refresh token does not match");
+        }
+
+        if (user.getRefreshtokenexpirydate().isBefore(LocalDateTime.now())) {
+            throw new RuntimeException("Refresh token expired");
+        }
+
+        UserDetails userDetails = this.buildUserDetails(user);
+
+        if (!jwtService.isTokenValid(refreshToken, userDetails)) {
+            throw new RuntimeException("Token is invalid");
+        }
+
+        String newAccessToken = jwtService.generateAccessToken(userDetails);
+        String newRefreshToken = jwtService.generateRefreshToken(userDetails);
+
+        return  new AuthResponse(newAccessToken, newRefreshToken, user.getMail(), accessTokenExpiration / 1000);
+    }
+
+    private UserDetails buildUserDetails(User user) {
+        return org.springframework.security.core.userdetails.User.builder()
+                .username(user.getMail())
+                .password(user.getPassword())
+                .authorities(user.getRole().name())
+                .build();
     }
 }
