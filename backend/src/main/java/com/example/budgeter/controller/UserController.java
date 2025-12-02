@@ -10,6 +10,6 @@ public class UserController {
 
     @GetMapping("/")
     String sayHello() {
-        return "Pasta la vista";
+        return "";
     }
 }
