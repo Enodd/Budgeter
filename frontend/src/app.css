@@ -1,1 +1,25 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+
+@theme {
+    --color-primary-main: #2c3b4d;
+    --color-primary-dark: #1b2632;
+    --color-secondary-main: #eee9df;
+    --color-secondary-dark: #c9c1b1;
+    --color-trietary-main: #ffb162;
+    --color-trietary-dark: #a35139;
+}
+
+html body {
+    background: radial-gradient(
+        circle at 0 50%,
+        var(--color-trietary-main) 10%,
+        var(--color-trietary-dark) 20%,
+        var(--color-primary-dark) 30%
+    );
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+* {
+    color: white;
+}
