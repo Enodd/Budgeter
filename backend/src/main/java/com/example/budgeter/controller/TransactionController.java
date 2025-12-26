@@ -3,6 +3,7 @@ package com.example.budgeter.controller;
 import com.example.budgeter.dto.transaction.TransactionRequest;
 import com.example.budgeter.entity.Transaction;
 import com.example.budgeter.service.TransactionService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,12 +13,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/api/transaction")
 @RequiredArgsConstructor
 public class TransactionController {
+
     private final TransactionService transactionService;
 
     @GetMapping("/")
@@ -35,8 +35,8 @@ public class TransactionController {
     @PostMapping("/")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Transaction> createTransaction(
-            @AuthenticationPrincipal UserDetails userDetails,
-            @RequestBody TransactionRequest transaction
+        @AuthenticationPrincipal UserDetails userDetails,
+        @RequestBody TransactionRequest transaction
     ) {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -44,6 +44,12 @@ public class TransactionController {
     @PutMapping("/")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> updateTransaction() {
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @PatchMapping("/")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<Void> patchTransaction() {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
