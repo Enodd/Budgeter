@@ -1,7 +1,9 @@
 package com.example.budgeter.controller;
 
 import com.example.budgeter.dto.transaction.TransactionRequest;
+import com.example.budgeter.dto.transaction.TransactionUpdateRequest;
 import com.example.budgeter.entity.Transaction;
+import com.example.budgeter.repository.UserRepository;
 import com.example.budgeter.service.TransactionService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -19,11 +21,19 @@ import org.springframework.web.bind.annotation.*;
 public class TransactionController {
 
     private final TransactionService transactionService;
+    private final UserRepository userRepository;
 
     @GetMapping("/")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<List<Transaction>> getTransactions() {
-        return ResponseEntity.ok(null);
+    public ResponseEntity<List<Transaction>> getTransactions(
+            @AuthenticationPrincipal UserDetails userDetails
+    ) {
+        var mail = userDetails.getUsername();
+        var user = userRepository
+                .findByMail(mail)
+                .orElseThrow(() -> new RuntimeException("User does not exist"));
+        var transactions = transactionService.getTransactions(user.getId());
+        return ResponseEntity.ok(transactions);
     }
 
     @GetMapping("/")
@@ -35,15 +45,16 @@ public class TransactionController {
     @PostMapping("/")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Transaction> createTransaction(
-        @AuthenticationPrincipal UserDetails userDetails,
         @RequestBody TransactionRequest transaction
     ) {
+        transactionService.addTransaction(transaction);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Void> updateTransaction() {
+    public ResponseEntity<Void> updateTransaction(@RequestBody TransactionUpdateRequest transactionRequest) {
+        transactionService.updateTransaction(transactionRequest);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 

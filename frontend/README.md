@@ -1,38 +1,44 @@
-# sv
+# Budgeter Frontend (React)
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Wierna migracja 1:1 z SvelteKit do React + Vite + React Router.
 
-## Creating a project
+## Tech Stack
+- React 19
+- TypeScript
+- Vite
+- React Router v7
+- TailwindCSS 4.x
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Development
 
-```sh
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
+```bash
+npm install
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+## Build
 
-To create a production version of your app:
-
-```sh
+```bash
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
+## Environment Variables
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Create `.env` file:
+
+```
+VITE_API_URL=http://localhost:3000
+```
+
+## Structure
+
+- `src/pages/` - strony (odpowiednik routes w SvelteKit)
+- `src/layouts/` - layouty (odpowiednik +layout.svelte)
+- `src/components/` - komponenty UI
+- `src/stores/` - store'y (Context API zamiast Svelte stores)
+- `src/lib/` - utilities i helpers
+
+## Routes
+
+- `/` - strona główna
+- `/auth/login` - strona logowania

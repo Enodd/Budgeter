@@ -1,40 +1,32 @@
 {
-	"name": "frontend",
-	"version": "0.0.1",
-	"devDependencies": {
-		"@eslint/compat": "^1.4.0",
-		"@eslint/js": "^9.36.0",
-		"@sveltejs/adapter-auto": "^6.1.0",
-		"@sveltejs/kit": "^2.43.2",
-		"@sveltejs/vite-plugin-svelte": "^6.2.0",
-		"@tailwindcss/vite": "^4.1.13",
-        "@tailwindcss/postcss": "^4.1.16",
-		"@types/node": "^22",
-		"autoprefixer": "^10.4.21",
-		"esbuild": "0.25.11",
-		"eslint": "^9.36.0",
-		"eslint-plugin-svelte": "^3.12.4",
-		"globals": "^16.4.0",
-		"postcss": "^8.5.6",
-		"svelte": "^5.39.5",
-		"svelte-check": "^4.3.2",
-		"tailwindcss": "^4.1.14",
-		"typescript": "^5.9.2",
-		"typescript-eslint": "^8.44.1",
-		"vite": "^7.1.7"
-	},
-	"private": true,
-	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
-		"preview": "vite preview",
-		"prepare": "svelte-kit sync || echo ''",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "eslint ."
-	},
-	"type": "module",
-	"dependencies": {
-		"@tailwindcss/cli": "^4.1.14"
-	}
+  "name": "frontend-react",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "~5.9.3",
+    "vite": "^7.2.4"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "autoprefixer": "^10.4.23",
+    "axios": "^1.13.2",
+    "i18next": "^25.7.4",
+    "i18next-browser-languagedetector": "^8.2.0",
+    "i18next-http-backend": "^3.0.2",
+    "i18next-resources-to-backend": "^1.2.1",
+    "postcss": "^8.5.6",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-i18next": "^16.5.3",
+    "react-router-dom": "^7.11.0",
+    "tailwindcss": "^4.1.18"
+  }
 }

@@ -1,0 +1,10 @@
+{
+  "home": {
+    "appDescription": "Twoje rozwiązanie na lepsze zarządzanie pieniędzmi",
+    "joinUs": "Dołącz do nas"
+  },
+  "nav": {
+    "login": "Zaloguj się",
+    "logout": "Wyloguj się"
+  }
+}

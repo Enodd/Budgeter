@@ -13,8 +13,8 @@ html body {
     background: radial-gradient(
         circle at 0 50%,
         var(--color-trietary-main) 10%,
-        var(--color-trietary-dark) 20%,
-        var(--color-primary-dark) 30%
+        var(--color-trietary-dark) 25%,
+        var(--color-primary-dark) 50%
     );
     background-repeat: no-repeat;
     background-size: cover;
@@ -22,4 +22,16 @@ html body {
 
 * {
     color: white;
+}
+
+.button, .button--secondary {
+    @apply p-2 rounded-sm;
+}
+
+.button--secondary {
+    background-color: var(--color-trietary-main);
+}
+
+h2 {
+    @apply text-2xl;
 }

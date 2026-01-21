@@ -1,0 +1,10 @@
+{
+  "home": {
+    "appDescription": "Your money management done right.",
+    "joinUs": "Join us"
+  },
+  "nav": {
+    "login": "Login",
+    "logout": "Logout"
+  }
+}

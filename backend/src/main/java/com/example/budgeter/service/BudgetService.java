@@ -53,7 +53,9 @@ public class BudgetService {
     }
 
     public void updateBudget(BudgetUpdateRequest request) {
-        Budget budget = new Budget();
+        Budget budget = budgetRepository
+                .findById(request.id())
+                .orElseThrow(() -> new RuntimeException("No budget found with given id"));
 
         if (request.name() != null) {
             budget.setName(request.name());
