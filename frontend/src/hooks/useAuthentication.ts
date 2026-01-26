@@ -7,10 +7,11 @@ export const useAuthentication = () => {
   const { login: storeLogin } = useAuth();
 
   const login = async (login: string, password: string) => {
+    console.log(login, password)
     const { data, status } = await axiosService.post<AuthResponse>(
       "/auth/login",
       {
-        login,
+        mail: login,
         password,
       },
     );
@@ -29,9 +30,9 @@ export const useAuthentication = () => {
     dateOfBirth: string,
   ): Promise<boolean> => {
     const { status } = await axiosService.post<AuthResponse>("/auth/register", {
-      login,
+      name: login,
       password,
-      email,
+      mail: email,
       dateOfBirth,
     });
     return [200, 202].includes(status);

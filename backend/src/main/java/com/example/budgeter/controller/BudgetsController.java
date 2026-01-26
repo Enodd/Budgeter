@@ -32,7 +32,7 @@ public class BudgetsController {
         return ResponseEntity.ok(budgetService.getAllBudgets(mail));
     }
 
-    @GetMapping("/")
+    @GetMapping(params = "id")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Budget> getBudget(@RequestParam int id) {
         return ResponseEntity.ok(budgetService.getBudget(id));

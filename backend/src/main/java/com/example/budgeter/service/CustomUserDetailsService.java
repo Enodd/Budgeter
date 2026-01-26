@@ -1,5 +1,6 @@
 package com.example.budgeter.service;
 
+import com.example.budgeter.entity.User;
 import com.example.budgeter.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

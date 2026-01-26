@@ -36,7 +36,7 @@ public class TransactionController {
         return ResponseEntity.ok(transactions);
     }
 
-    @GetMapping("/")
+    @GetMapping(params = "id")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Transaction> getTransactionById(@RequestParam int id) {
         return ResponseEntity.ok(null);

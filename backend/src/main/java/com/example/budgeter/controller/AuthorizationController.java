@@ -2,7 +2,6 @@ package com.example.budgeter.controller;
 
 import com.example.budgeter.dto.auth.AuthResponse;
 import com.example.budgeter.dto.auth.LoginRequest;
-import com.example.budgeter.dto.auth.RefreshTokenRequest;
 import com.example.budgeter.dto.auth.RegisterRequest;
 import com.example.budgeter.service.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -26,10 +25,5 @@ public class AuthorizationController {
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
         return ResponseEntity.ok(authService.login(request));
-    }
-
-    @PostMapping("/refresh")
-    public ResponseEntity<AuthResponse> refresh(@RequestBody RefreshTokenRequest request) {
-        return ResponseEntity.ok(authService.refreshToken(request.refreshToken()));
     }
 }

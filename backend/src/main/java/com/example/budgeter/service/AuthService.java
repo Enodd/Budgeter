@@ -47,9 +47,8 @@ public class AuthService {
                 .authorities(user.getRole().name())
                 .build();
         String accessToken = jwtService.generateAccessToken(userDetails);
-        String refreshToken = jwtService.generateRefreshToken(userDetails);
 
-        return new AuthResponse(accessToken, refreshToken, user.getMail(), accessTokenExpiration);
+        return new AuthResponse(accessToken, user.getMail(), accessTokenExpiration);
     }
 
     public AuthResponse login(LoginRequest request) {
@@ -69,45 +68,7 @@ public class AuthService {
                 .build();
 
         String accessToken = jwtService.generateAccessToken(userDetails);
-        String refreshToken = jwtService.generateRefreshToken(userDetails);
 
-        user.setRefreshtoken(refreshToken);
-        user.setRefreshtokenexpirydate(LocalDateTime.now().plusDays(7));
-
-        return new AuthResponse(accessToken, refreshToken, user.getMail(), accessTokenExpiration / 1000);
-    }
-
-    public AuthResponse refreshToken(String refreshToken) {
-        String mail = jwtService.extractUsername(refreshToken);
-        User user = userRepository
-                .findByMail(mail)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        if (!refreshToken.equals(user.getRefreshtoken())) {
-            throw new RuntimeException("Refresh token does not match");
-        }
-
-        if (user.getRefreshtokenexpirydate().isBefore(LocalDateTime.now())) {
-            throw new RuntimeException("Refresh token expired");
-        }
-
-        UserDetails userDetails = this.buildUserDetails(user);
-
-        if (!jwtService.isTokenValid(refreshToken, userDetails)) {
-            throw new RuntimeException("Token is invalid");
-        }
-
-        String newAccessToken = jwtService.generateAccessToken(userDetails);
-        String newRefreshToken = jwtService.generateRefreshToken(userDetails);
-
-        return  new AuthResponse(newAccessToken, newRefreshToken, user.getMail(), accessTokenExpiration / 1000);
-    }
-
-    private UserDetails buildUserDetails(User user) {
-        return org.springframework.security.core.userdetails.User.builder()
-                .username(user.getMail())
-                .password(user.getPassword())
-                .authorities(user.getRole().name())
-                .build();
+        return new AuthResponse(accessToken, user.getMail(), accessTokenExpiration);
     }
 }

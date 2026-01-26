@@ -1,18 +1,20 @@
 import { useState } from "react";
 import { useAuthentication } from "../hooks/useAuthentication";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const [error, setError] = useState<string>();
   const { login } = useAuthentication();
+  const { t } = useTranslation();
 
   const handleSubmit = async (data: FormData) => {
     const userLogin = data.get("login")?.toString();
     const password = data.get("password")?.toString();
 
     if (!userLogin || !password) {
-      setError("An error occured while trying to log in");
+      setError(t('error.login'));
       return;
     }
 
