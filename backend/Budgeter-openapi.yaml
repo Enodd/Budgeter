@@ -1,0 +1,611 @@
+openapi: "3.1.0"
+info:
+  title: "Budgeter API"
+  description: "Budgeter API"
+  version: "1.0.0"
+servers:
+  - url: "https://Budgeter"
+paths:
+  /api/budgets:
+    get:
+      summary: "GET api/budgets"
+      operationId: "getBudget"
+      parameters:
+        - name: "id"
+          in: "query"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/BudgetDto"
+  /api/budgets/:
+    get:
+      summary: "GET api/budgets/"
+      operationId: "getAllBudgets"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/BudgetDto"
+    put:
+      summary: "PUT api/budgets/"
+      operationId: "updateBudget"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BudgetUpdateRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Void"
+    post:
+      summary: "POST api/budgets/"
+      operationId: "createBudget"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BudgetRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Void"
+    delete:
+      summary: "DELETE api/budgets/"
+      operationId: "deleteBudget"
+      parameters:
+        - name: "id"
+          in: "query"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Void"
+  /api/transaction:
+    get:
+      summary: "GET api/transaction"
+      operationId: "getTransactionById"
+      parameters:
+        - name: "id"
+          in: "query"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Transaction"
+  /api/transaction/:
+    get:
+      summary: "GET api/transaction/"
+      operationId: "getTransactions"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Transaction"
+    put:
+      summary: "PUT api/transaction/"
+      operationId: "updateTransaction"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TransactionUpdateRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Void"
+    post:
+      summary: "POST api/transaction/"
+      operationId: "createTransaction"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TransactionRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Void"
+    delete:
+      summary: "DELETE api/transaction/"
+      operationId: "deleteTransaction"
+      parameters:
+        - name: "id"
+          in: "query"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Void"
+  /api/budget/category:
+    get:
+      summary: "GET api/budget/category"
+      operationId: "getCategoryById"
+      parameters:
+        - name: "id"
+          in: "query"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/BudgetCategoryDto"
+  /api/budget/category/:
+    get:
+      summary: "GET api/budget/category/"
+      operationId: "getCategories"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/BudgetCategoryDto"
+    put:
+      summary: "PUT api/budget/category/"
+      operationId: "updateCategory"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BudgetCategoryDto"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Void"
+    post:
+      summary: "POST api/budget/category/"
+      operationId: "createCategory"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BudgetCategoryRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Void"
+    delete:
+      summary: "DELETE api/budget/category/"
+      operationId: "deleteCategory"
+      parameters:
+        - name: "id"
+          in: "query"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Void"
+  /api/finantial_goals:
+    get:
+      summary: "GET api/finantial_goals"
+      operationId: "getGoal"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/FinancialGoalDto"
+  /api/finantial_goals/:
+    get:
+      summary: "GET api/finantial_goals/"
+      operationId: "getGoals"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/FinancialGoalDto"
+    put:
+      summary: "PUT api/finantial_goals/"
+      operationId: "updateGoal"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Void"
+    post:
+      summary: "POST api/finantial_goals/"
+      operationId: "createGoal"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Void"
+    delete:
+      summary: "DELETE api/finantial_goals/"
+      operationId: "deleteGoal"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/Void"
+  /api/users/:
+    get:
+      summary: "GET api/users/"
+      operationId: "sayHello"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "string"
+  /api/auth/login:
+    post:
+      summary: "POST api/auth/login"
+      operationId: "login"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /api/auth/register:
+    post:
+      summary: "POST api/auth/register"
+      operationId: "register"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+components:
+  schemas:
+    BigDecimal:
+      type: "object"
+      properties: { }
+    BudgetDto:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+          nullable: true
+        name:
+          type: "string"
+          nullable: true
+        periodStart:
+          type: "string"
+          format: "date"
+          nullable: true
+        periodEnd:
+          type: "string"
+          format: "date"
+          nullable: true
+        totalLimit:
+          nullable: true
+          $ref: "#/components/schemas/BigDecimal"
+    BudgetUpdateRequest:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+          nullable: true
+        name:
+          type: "string"
+          nullable: true
+        periodStart:
+          type: "string"
+          format: "date"
+          nullable: true
+        periodEnd:
+          type: "string"
+          format: "date"
+          nullable: true
+        totalLimit:
+          nullable: true
+          $ref: "#/components/schemas/BigDecimal"
+    Void:
+      type: "object"
+      properties: { }
+    BudgetRequest:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          nullable: true
+        periodStart:
+          type: "string"
+          format: "date"
+          nullable: true
+        periodEnd:
+          type: "string"
+          format: "date"
+          nullable: true
+        totalLimit:
+          nullable: true
+          $ref: "#/components/schemas/BigDecimal"
+    BudgetCategory:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+          nullable: true
+        name:
+          type: "string"
+          nullable: true
+        plannedAmount:
+          nullable: true
+          $ref: "#/components/schemas/BigDecimal"
+        spentAmount:
+          nullable: true
+          $ref: "#/components/schemas/BigDecimal"
+        limitAmount:
+          nullable: true
+          $ref: "#/components/schemas/BigDecimal"
+        color:
+          type: "string"
+          nullable: true
+    Transaction:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+          nullable: true
+        budgetCategory:
+          nullable: true
+          $ref: "#/components/schemas/BudgetCategory"
+        amount:
+          nullable: true
+          $ref: "#/components/schemas/BigDecimal"
+        description:
+          type: "string"
+          nullable: true
+        transactionDate:
+          type: "string"
+          format: "date"
+          nullable: true
+        type:
+          type: "string"
+          nullable: true
+    TransactionUpdateRequest:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          nullable: true
+        amount:
+          nullable: true
+          $ref: "#/components/schemas/BigDecimal"
+        description:
+          type: "string"
+          nullable: true
+        transactionDate:
+          type: "string"
+          format: "date"
+          nullable: true
+        type:
+          type: "string"
+          nullable: true
+        budgetCategoryId:
+          type: "integer"
+          format: "int32"
+          nullable: true
+    TransactionRequest:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          nullable: true
+        amount:
+          nullable: true
+          $ref: "#/components/schemas/BigDecimal"
+        description:
+          type: "string"
+          nullable: true
+        transactionDate:
+          type: "string"
+          format: "date"
+          nullable: true
+        type:
+          type: "string"
+          nullable: true
+        budgetCategoryId:
+          type: "integer"
+          format: "int32"
+          nullable: true
+    BudgetCategoryDto:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+          nullable: true
+        name:
+          type: "string"
+          nullable: true
+        plannedAmount:
+          nullable: true
+          $ref: "#/components/schemas/BigDecimal"
+        spentAmount:
+          nullable: true
+          $ref: "#/components/schemas/BigDecimal"
+        limitAmount:
+          nullable: true
+          $ref: "#/components/schemas/BigDecimal"
+        color:
+          type: "string"
+          nullable: true
+    BudgetCategoryRequest:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+          nullable: true
+        plannedAmount:
+          nullable: true
+          $ref: "#/components/schemas/BigDecimal"
+        spentAmount:
+          nullable: true
+          $ref: "#/components/schemas/BigDecimal"
+        limitAmount:
+          nullable: true
+          $ref: "#/components/schemas/BigDecimal"
+        color:
+          type: "string"
+          nullable: true
+    FinancialGoalDto:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int32"
+          nullable: true
+        userId:
+          type: "integer"
+          format: "int32"
+          nullable: true
+        name:
+          type: "string"
+          nullable: true
+        targetAmount:
+          nullable: true
+          $ref: "#/components/schemas/BigDecimal"
+        currentAmount:
+          nullable: true
+          $ref: "#/components/schemas/BigDecimal"
+        deadline:
+          type: "string"
+          format: "date"
+          nullable: true
+        priority:
+          type: "integer"
+          format: "int32"
+          nullable: true
+    LoginRequest:
+      type: "object"
+      properties:
+        mail:
+          type: "string"
+          nullable: true
+        password:
+          type: "string"
+          nullable: true
+    AuthResponse:
+      type: "object"
+      properties:
+        accessToken:
+          type: "string"
+          nullable: true
+        email:
+          type: "string"
+          nullable: true
+        expiresIn:
+          type: "integer"
+          format: "int64"
+          nullable: true
+    RegisterRequest:
+      type: "object"
+      properties:
+        mail:
+          type: "string"
+          nullable: true
+        password:
+          type: "string"
+          nullable: true
+        name:
+          type: "string"
+          nullable: true
+        dateOfBirth:
+          type: "string"
+          format: "date"
+          nullable: true
