@@ -5,7 +5,6 @@ import com.example.budgeter.dto.transaction.TransactionUpdateRequest;
 import com.example.budgeter.entity.Transaction;
 import com.example.budgeter.repository.CategoryRepository;
 import com.example.budgeter.repository.TransactionRepository;
-import com.example.budgeter.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -49,5 +48,9 @@ public class TransactionService {
         var transaction = transactionRepository
                 .findAllByBudgetCategoryId(request.budgetCategoryId())
                 .orElseThrow(() -> new RuntimeException("Transaction not found"));
+    }
+
+    public void deleteTransaction(int id) {
+        transactionRepository.deleteById(id);
     }
 }

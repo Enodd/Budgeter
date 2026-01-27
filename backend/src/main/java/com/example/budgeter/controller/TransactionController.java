@@ -44,7 +44,7 @@ public class TransactionController {
 
     @PostMapping("/")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Transaction> createTransaction(
+    public ResponseEntity<Void> createTransaction(
         @RequestBody TransactionRequest transaction
     ) {
         transactionService.addTransaction(transaction);
@@ -58,15 +58,10 @@ public class TransactionController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @PatchMapping("/")
-    @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Void> patchTransaction() {
-        return ResponseEntity.status(HttpStatus.OK).build();
-    }
-
     @DeleteMapping("/")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> deleteTransaction(@RequestParam int id) {
+        transactionService.deleteTransaction(id);
         return ResponseEntity.noContent().build();
     }
 }

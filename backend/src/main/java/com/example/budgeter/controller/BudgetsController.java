@@ -1,14 +1,12 @@
 package com.example.budgeter.controller;
 
+import com.example.budgeter.dto.budget.BudgetDto;
 import com.example.budgeter.dto.budget.BudgetRequest;
 import com.example.budgeter.dto.budget.BudgetUpdateRequest;
-import com.example.budgeter.entity.Budget;
-import com.example.budgeter.service.AuthService;
 import com.example.budgeter.service.BudgetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,7 +24,7 @@ public class BudgetsController {
 
     @GetMapping("/")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<List<Budget>> getAllBudgets(@AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity<List<BudgetDto>> getAllBudgets(@AuthenticationPrincipal UserDetails userDetails) {
         String mail = userDetails.getUsername();
 
         return ResponseEntity.ok(budgetService.getAllBudgets(mail));
@@ -34,7 +32,7 @@ public class BudgetsController {
 
     @GetMapping(params = "id")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Budget> getBudget(@RequestParam int id) {
+    public ResponseEntity<BudgetDto> getBudget(@RequestParam int id) {
         return ResponseEntity.ok(budgetService.getBudget(id));
     }
 

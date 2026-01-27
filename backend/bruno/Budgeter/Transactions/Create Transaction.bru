@@ -1,0 +1,26 @@
+meta {
+  name: Create Transaction
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{base_url}}/api/transaction/
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+body:json {
+  {
+    "name": "Zakupy spożywcze",
+    "amount": 250.50,
+    "description": "Zakupy w supermarkecie",
+    "transactionDate": "2024-01-15",
+    "type": "EXPENSE",
+    "budgetCategoryId": 1
+  }
+}

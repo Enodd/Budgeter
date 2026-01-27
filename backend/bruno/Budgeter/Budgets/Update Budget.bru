@@ -1,0 +1,25 @@
+meta {
+  name: Update Budget
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{base_url}}/api/budgets/
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+body:json {
+  {
+    "id": 1,
+    "name": "Zaktualizowany budżet",
+    "periodStart": "2024-01-01",
+    "periodEnd": "2024-01-31",
+    "totalLimit": 6000.00
+  }
+}

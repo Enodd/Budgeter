@@ -1,0 +1,24 @@
+meta {
+  name: Create Budget
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{base_url}}/api/budgets/
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+body:json {
+  {
+    "name": "Miesięczny budżet",
+    "periodStart": "2026-01-01",
+    "periodEnd": "2026-01-31",
+    "totalLimit": 5000.00
+  }
+}

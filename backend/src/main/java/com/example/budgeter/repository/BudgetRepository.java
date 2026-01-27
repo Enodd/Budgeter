@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface BudgetRepository extends JpaRepository<Budget, Integer> {
     Optional<Budget> findById(int id);
     Optional<List<Budget>> findAllByIdUser(User idUser);
+    Optional<List<Budget>> findAllByBudgetCategoryId(int id);
 }

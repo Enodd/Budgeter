@@ -15,30 +15,32 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "financial_goals")
 public class FinancialGoal {
-    @Id
-    @Column(name = "id", nullable = false)
-    private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id", nullable = false)
+  private Integer id;
 
-    @Size(max = 255)
-    @NotNull
-    @Column(name = "name", nullable = false)
-    private String name;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id")
+  private User user;
 
-    @Column(name = "target_amount", precision = 12, scale = 2)
-    private BigDecimal targetAmount;
+  @Size(max = 255)
+  @NotNull
+  @Column(name = "name", nullable = false)
+  private String name;
 
-    @ColumnDefault("0")
-    @Column(name = "current_amount", precision = 12, scale = 2)
-    private BigDecimal currentAmount;
+  @Column(name = "target_amount", precision = 12, scale = 2)
+  private BigDecimal targetAmount;
 
-    @Column(name = "deadline")
-    private LocalDate deadline;
+  @ColumnDefault("0")
+  @Column(name = "current_amount", precision = 12, scale = 2)
+  private BigDecimal currentAmount;
 
-    @Column(name = "priority")
-    private Integer priority;
+  @Column(name = "deadline")
+  private LocalDate deadline;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+  @Column(name = "priority")
+  private Integer priority;
+
 
 }
