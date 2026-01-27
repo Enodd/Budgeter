@@ -4,7 +4,7 @@ info:
   description: "Budgeter API"
   version: "1.0.0"
 servers:
-  - url: "https://Budgeter"
+  - url: "https://localhost:8080/"
 paths:
   /api/budgets:
     get:
