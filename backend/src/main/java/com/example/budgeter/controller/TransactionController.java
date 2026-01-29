@@ -1,5 +1,6 @@
 package com.example.budgeter.controller;
 
+import com.example.budgeter.dto.transaction.TransactionDto;
 import com.example.budgeter.dto.transaction.TransactionRequest;
 import com.example.budgeter.dto.transaction.TransactionUpdateRequest;
 import com.example.budgeter.entity.Transaction;
@@ -25,7 +26,7 @@ public class TransactionController {
 
     @GetMapping("/")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<List<Transaction>> getTransactions(
+    public ResponseEntity<List<TransactionDto>> getTransactions(
             @AuthenticationPrincipal UserDetails userDetails
     ) {
         var mail = userDetails.getUsername();
@@ -38,27 +39,25 @@ public class TransactionController {
 
     @GetMapping(params = "id")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Transaction> getTransactionById(@RequestParam int id) {
-        return ResponseEntity.ok(null);
+    public ResponseEntity<TransactionDto> getTransactionById(@RequestParam int id) {
+        return ResponseEntity.ok(transactionService.getTransaction(id));
     }
 
     @PostMapping("/")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Void> createTransaction(
+    public ResponseEntity<TransactionDto> createTransaction(
         @RequestBody TransactionRequest transaction
     ) {
-        transactionService.addTransaction(transaction);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.ok(transactionService.addTransaction(transaction));
     }
 
     @PutMapping("/")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Void> updateTransaction(@RequestBody TransactionUpdateRequest transactionRequest) {
-        transactionService.updateTransaction(transactionRequest);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    public ResponseEntity<TransactionDto> updateTransaction(@RequestBody TransactionUpdateRequest transactionRequest) {
+        return ResponseEntity.ok(transactionService.updateTransaction(transactionRequest));
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping(params = "id")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> deleteTransaction(@RequestParam int id) {
         transactionService.deleteTransaction(id);

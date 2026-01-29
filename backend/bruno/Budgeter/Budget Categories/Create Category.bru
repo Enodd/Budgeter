@@ -1,0 +1,25 @@
+meta {
+  name: Create Category
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{base_url}}/api/budgets/category/
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{access_token}}
+}
+
+body:json {
+  {
+    "name": "Jedzenie",
+    "plannedAmount": 1000.00,
+    "spentAmount": 0.00,
+    "limitAmount": 1200.00,
+    "color": "#FF5733"
+  }
+}

@@ -7,18 +7,22 @@ meta {
 post {
   url: {{base_url}}/api/budgets/
   body: json
-  auth: bearer
+  auth: none
 }
 
-auth:bearer {
-  token: {{access_token}}
+headers {
+  Authorization: Bearer {{access_token}}
 }
 
 body:json {
   {
     "name": "Miesięczny budżet",
-    "periodStart": "2026-01-01",
-    "periodEnd": "2026-01-31",
+    "periodStart": "2024-01-01",
+    "periodEnd": "2024-01-31",
     "totalLimit": 5000.00
   }
+}
+
+docs {
+  Zwraca BudgetDto z utworzonym budżetem
 }

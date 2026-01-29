@@ -1,5 +1,5 @@
 meta {
-  name: Say Hello
+  name: Get User
   type: http
   seq: 1
 }
@@ -10,6 +10,6 @@ get {
   auth: none
 }
 
-docs {
-  Prosty endpoint testowy zwracający pustą odpowiedź.
+headers {
+  Authorization: Bearer {{access_token}}
 }

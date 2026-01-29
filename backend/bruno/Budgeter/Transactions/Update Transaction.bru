@@ -7,18 +7,19 @@ meta {
 put {
   url: {{base_url}}/api/transaction/
   body: json
-  auth: bearer
+  auth: none
 }
 
-auth:bearer {
-  token: {{access_token}}
+headers {
+  Authorization: Bearer {{access_token}}
 }
 
 body:json {
   {
+    "id": 1,
     "name": "Zaktualizowane zakupy",
     "amount": 300.00,
-    "description": "Zaktualizowany opis",
+    "description": "Zaktualizowany opis transakcji",
     "transactionDate": "2024-01-16",
     "type": "EXPENSE",
     "budgetCategoryId": 1

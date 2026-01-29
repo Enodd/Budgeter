@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public record TransactionUpdateRequest(
+    Integer id,
     String name,
     BigDecimal amount,
     String description,

@@ -50,8 +50,11 @@ public class FinancialGoalService {
     );
   }
 
-  public void createGoal(FinancialGoalRequest request) {
+  public FinancialGoalDto createGoal(FinancialGoalRequest request) {
     var goal = new FinancialGoal();
+    System.out.println("====================");
+    System.out.println(goal);
+    System.out.println(request);
     var user = userRepository.findById(request.userId()).orElseThrow(() -> new RuntimeException("No such user"));
     goal.setUser(user);
     goal.setName(request.name());
@@ -60,17 +63,30 @@ public class FinancialGoalService {
     goal.setDeadline(request.deadline());
     goal.setPriority(request.priority());
 
-    financialGoalRepository.save(goal);
+    var createdGoal = financialGoalRepository.save(goal);
+    return this.toDto(createdGoal);
   }
 
-  public void updateGoal(FinancialGoalDto request) {
+  public FinancialGoalDto updateGoal(FinancialGoalDto request) {
     var goal = financialGoalRepository.findById(request.id()).orElseThrow(() -> new RuntimeException("No such goal"));
 
-    goal.setName(request.name());
-    goal.setTargetAmount(request.targetAmount());
-    goal.setCurrentAmount(request.currentAmount());
-    goal.setDeadline(request.deadline());
-    goal.setPriority(request.priority());
+    if (request.name() != null) {
+      goal.setName(request.name());
+    }
+    if (request.targetAmount() != null) {
+      goal.setTargetAmount(request.targetAmount());
+    }
+    if (request.currentAmount() != null) {
+      goal.setCurrentAmount(request.currentAmount());
+    }
+    if (request.deadline() != null) {
+      goal.setDeadline(request.deadline());
+    }
+    if (request.priority() != null) {
+      goal.setPriority(request.priority());
+    }
+    var updatedGoal = financialGoalRepository.save(goal);
+    return this.toDto(updatedGoal);
   }
 
   public void deleteGoal(int goalId) {

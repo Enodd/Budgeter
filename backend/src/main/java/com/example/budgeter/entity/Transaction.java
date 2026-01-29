@@ -20,6 +20,10 @@ public class Transaction {
   private Integer id;
 
   @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id")
+  private User user;
+
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "budget_category_id")
   private BudgetCategory budgetCategory;
 

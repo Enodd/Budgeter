@@ -7,18 +7,18 @@ meta {
 post {
   url: {{base_url}}/api/transaction/
   body: json
-  auth: bearer
+  auth: none
 }
 
-auth:bearer {
-  token: {{access_token}}
+headers {
+  Authorization: Bearer {{access_token}}
 }
 
 body:json {
   {
     "name": "Zakupy spożywcze",
     "amount": 250.50,
-    "description": "Zakupy w supermarkecie",
+    "description": "Zakupy w Biedronce",
     "transactionDate": "2024-01-15",
     "type": "EXPENSE",
     "budgetCategoryId": 1

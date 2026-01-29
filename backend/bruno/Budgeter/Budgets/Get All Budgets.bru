@@ -7,9 +7,9 @@ meta {
 get {
   url: {{base_url}}/api/budgets/
   body: none
-  auth: bearer
+  auth: none
 }
 
-auth:bearer {
-  token: {{access_token}}
+headers {
+  Authorization: Bearer {{access_token}}
 }

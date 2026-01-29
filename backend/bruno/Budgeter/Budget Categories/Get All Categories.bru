@@ -1,17 +1,13 @@
 meta {
-  name: Delete Budget
+  name: Get All Categories
   type: http
-  seq: 5
+  seq: 1
 }
 
-delete {
-  url: {{base_url}}/api/budgets?id=1
+get {
+  url: {{base_url}}/api/budgets/category/
   body: none
   auth: none
-}
-
-params:query {
-  id: 1
 }
 
 headers {

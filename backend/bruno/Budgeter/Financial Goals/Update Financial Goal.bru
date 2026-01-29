@@ -1,0 +1,27 @@
+meta {
+  name: Update Financial Goal
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{base_url}}/api/finantial_goals/
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{access_token}}
+}
+
+body:json {
+  {
+    "id": 1,
+    "userId": 1,
+    "name": "Oszczędności na wakacje - zaktualizowane",
+    "targetAmount": 12000.00,
+    "currentAmount": 3500.00,
+    "deadline": "2024-07-31",
+    "priority": 1
+  }
+}

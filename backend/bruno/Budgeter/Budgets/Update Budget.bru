@@ -7,11 +7,11 @@ meta {
 put {
   url: {{base_url}}/api/budgets/
   body: json
-  auth: bearer
+  auth: none
 }
 
-auth:bearer {
-  token: {{access_token}}
+headers {
+  Authorization: Bearer {{access_token}}
 }
 
 body:json {
@@ -22,4 +22,8 @@ body:json {
     "periodEnd": "2024-01-31",
     "totalLimit": 6000.00
   }
+}
+
+docs {
+  Zwraca BudgetDto ze zaktualizowanym budżetem
 }

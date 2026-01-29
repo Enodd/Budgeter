@@ -1,0 +1,26 @@
+meta {
+  name: Create Financial Goal
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{base_url}}/api/finantial_goals/
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{access_token}}
+}
+
+body:json {
+  {
+    "userId": 1,
+    "name": "Oszczędności na wakacje",
+    "targetAmount": 10000.00,
+    "currentAmount": 2000.00,
+    "deadline": "2024-06-30",
+    "priority": 1
+  }
+}
