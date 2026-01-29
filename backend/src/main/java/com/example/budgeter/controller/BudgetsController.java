@@ -38,21 +38,18 @@ public class BudgetsController {
 
     @PostMapping("/")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Void> createBudget(
+    public ResponseEntity<BudgetDto> createBudget(
             @AuthenticationPrincipal UserDetails userDetails,
             @RequestBody BudgetRequest budgetRequest
     ) {
         String mail = userDetails.getUsername();
-
-        budgetService.addBudget(mail, budgetRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.ok(budgetService.addBudget(mail, budgetRequest));
     }
 
     @PutMapping("/")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Void> updateBudget(@RequestBody BudgetUpdateRequest budgetRequest) {
-        budgetService.updateBudget(budgetRequest);
-        return  ResponseEntity.status(HttpStatus.OK).build();
+    public ResponseEntity<BudgetDto> updateBudget(@RequestBody BudgetUpdateRequest budgetRequest) {
+        return  ResponseEntity.ok(budgetService.updateBudget(budgetRequest));
     }
 
     @DeleteMapping("/")

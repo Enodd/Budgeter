@@ -39,7 +39,7 @@ public class AuthService {
         user.setDateofbirth(request.dateOfBirth());
         user.setRole(Role.USER);
 
-        userRepository.save(user);
+        var userId = userRepository.save(user).getId();
 
         UserDetails userDetails = org.springframework.security.core.userdetails.User.builder()
                 .username(user.getMail())
@@ -48,7 +48,7 @@ public class AuthService {
                 .build();
         String accessToken = jwtService.generateAccessToken(userDetails);
 
-        return new AuthResponse(accessToken, user.getMail(), accessTokenExpiration);
+        return new AuthResponse(accessToken, user.getMail(), userId, accessTokenExpiration);
     }
 
     public AuthResponse login(LoginRequest request) {
@@ -69,6 +69,6 @@ public class AuthService {
 
         String accessToken = jwtService.generateAccessToken(userDetails);
 
-        return new AuthResponse(accessToken, user.getMail(), accessTokenExpiration);
+        return new AuthResponse(accessToken, user.getMail(), user.getId(), accessTokenExpiration);
     }
 }

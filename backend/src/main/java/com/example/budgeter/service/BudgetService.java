@@ -49,7 +49,7 @@ public class BudgetService {
       .toList();
   }
 
-  public void addBudget(String mail, BudgetRequest request) {
+  public BudgetDto addBudget(String mail, BudgetRequest request) {
     User user = userRepository
       .findByMail(mail)
       .orElseThrow(() -> new RuntimeException("User not found"));
@@ -65,9 +65,10 @@ public class BudgetService {
 
     budget.setIdUser(user);
     budgetRepository.save(budget);
+    return this.toDto(budget);
   }
 
-  public void updateBudget(BudgetUpdateRequest request) {
+  public BudgetDto updateBudget(BudgetUpdateRequest request) {
     Budget budget = budgetRepository
       .findById(request.id())
       .orElseThrow(() -> new RuntimeException("No budget found with given id"));
@@ -88,6 +89,7 @@ public class BudgetService {
       budget.setTotalLimit(request.totalLimit());
     }
     budgetRepository.save(budget);
+    return this.toDto(budget);
   }
 
   public void deleteBudget(int id) {

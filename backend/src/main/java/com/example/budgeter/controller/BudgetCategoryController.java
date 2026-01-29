@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/budget/category")
+@RequestMapping("/api/budgets/category")
 @RequiredArgsConstructor
 public class BudgetCategoryController {
   private final BudgetCategoryService budgetCategoryService;
