@@ -6,5 +6,8 @@
   "nav": {
     "login": "Login",
     "logout": "Logout"
+  },
+  "error": {
+    "login": "An error occured while trying to log you in. Check you email and password"
   }
 }

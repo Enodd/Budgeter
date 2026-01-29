@@ -1,16 +1,15 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 import { StorageKeys } from "../lib/enums/StorageKeys";
-import { Envs } from "../lib/envs";
 
 interface AuthState {
   authToken: string | null;
-  refreshToken: string | null;
   username: string | null;
+  userId: number;
   isAuthenticated: boolean;
 }
 
 interface AuthContextType extends AuthState {
-  login: (authToken: string, refreshToken: string, username: string) => void;
+  login: (authToken: string, username: string, userId: number) => void;
   logout: (reason: string | null) => void;
   checkAuth: () => void;
   getLogoutReason: () => string | null;
@@ -21,43 +20,44 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [authState, setAuthState] = useState<AuthState>({
     authToken: null,
-    refreshToken: null,
     username: null,
+    userId: 0,
     isAuthenticated: false,
   });
 
-  const login = (authToken: string, refreshToken: string, username: string) => {
+  const login = (authToken: string, username: string, userId: number) => {
     localStorage.setItem(StorageKeys.AUTH_TOKEN, authToken);
-    localStorage.setItem(StorageKeys.REFRESH_TOKEN, refreshToken);
     localStorage.setItem(StorageKeys.USERNAME, username);
-    setAuthState({ authToken, refreshToken, username, isAuthenticated: true });
+    localStorage.setItem(StorageKeys.USER_ID, userId + '');
+    setAuthState({ authToken, username, userId, isAuthenticated: true });
   };
 
   const logout = (reason: string | null = null) => {
     localStorage.removeItem(StorageKeys.AUTH_TOKEN);
-    localStorage.removeItem(StorageKeys.REFRESH_TOKEN);
     localStorage.removeItem(StorageKeys.USERNAME);
+    localStorage.removeItem(StorageKeys.USER_ID);
 
     if (reason) {
       localStorage.setItem(StorageKeys.LOGOUT_REASON, reason);
     }
     setAuthState({
       authToken: null,
-      refreshToken: null,
       username: null,
+      userId: 0,
       isAuthenticated: false,
     });
   };
 
   const checkAuth = () => {
-    const refreshToken = localStorage.getItem(StorageKeys.REFRESH_TOKEN);
     const username = localStorage.getItem(StorageKeys.USERNAME);
     const authToken = localStorage.getItem(StorageKeys.AUTH_TOKEN);
-    if (authToken && refreshToken && username) {
+    const userId = localStorage.getItem(StorageKeys.USER_ID);
+
+    if (authToken && username && userId) {
       setAuthState({
         authToken,
-        refreshToken,
         username,
+        userId: parseInt(userId),
         isAuthenticated: true,
       });
     }

@@ -6,5 +6,8 @@
   "nav": {
     "login": "Zaloguj się",
     "logout": "Wyloguj się"
+  },
+  "error": {
+    "login": "Wystąpił błąd podczas logowania. Upewnij się, że login i hasło są poprawne"
   }
 }

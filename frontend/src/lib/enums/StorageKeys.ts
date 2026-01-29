@@ -1,6 +1,6 @@
 export enum StorageKeys {
   AUTH_TOKEN = "authtoken",
-  REFRESH_TOKEN = "refreshtoken",
+  USER_ID = "userid",
   USERNAME = "username",
   LOGOUT_REASON = "logoutReason",
 }
