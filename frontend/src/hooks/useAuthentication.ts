@@ -1,6 +1,15 @@
 import { AuthResponse } from "../lib/AuthResponse";
-import axiosService from "../services/axiosService";
 import { useAuth } from "../stores/authStore";
+import axios from "axios";
+import {Envs} from "../lib/envs.ts";
+
+const axiosService = axios.create({
+  baseURL: Envs.apiUrl,
+  timeout: 1000,
+  headers: {
+    "Content-Type": "application/json",
+  },
+})
 
 export const useAuthentication = () => {
   const { login: storeLogin } = useAuth();

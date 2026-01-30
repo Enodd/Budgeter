@@ -2,16 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useTransactions } from "../hooks/useTransactions";
 import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { Transaction } from "../lib/Transaction";
 
-export const TransactionList: React.FC = () => {
-  const { transactions } = useTransactions();
+export const TransactionList: React.FC<{list?: Transaction[]}> = ({ list }) => {
+  const { transactions: fetchedTransactions } = useTransactions();
   const { t } = useTranslation();
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(5);
-
-  useEffect(() => {
-    console.log(Math.ceil(transactions.length / rowsPerPage));
-  })
+  const transactions = list || fetchedTransactions;
 
   return <Grid container>
     <Grid size={12}>

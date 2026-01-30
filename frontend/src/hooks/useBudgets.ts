@@ -11,6 +11,7 @@ export const useBudgets = () => {
     try {
       setLoading(true);
       const { data } = await axiosInstance.get<BudgetDto[]>(Envs.apiUrl + '/budgets' + (id ? `?id=${id}` : ''));
+      console.log(data)
       setBudgets(data);
       setLoading(false);
       return data;

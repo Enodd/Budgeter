@@ -13,6 +13,15 @@
       "title": "Rejestracja"
     }
   },
+  "budgetDashboard": {
+    "budget": {
+      "id": "Id",
+      "periodEnd": "Data zakończenia",
+      "periodStart": "Data rozpoczęcia",
+      "totalLimit": "Limit wydawania",
+      "transactionCount": "Liczba transakcji"
+    }
+  },
   "chart": {
     "budget": {
       "average": "Średnia miesięczna wartość założonego budżetu"

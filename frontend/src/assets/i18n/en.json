@@ -13,6 +13,15 @@
       "title": "Register"
     }
   },
+  "budgetDashboard": {
+    "budget": {
+      "id": "Id",
+      "periodEnd": "Period end",
+      "periodStart": "Start period",
+      "totalLimit": "Spending limit",
+      "transactionCount": "Transaction count"
+    }
+  },
   "chart": {
     "budget": {
       "average": "Average monthly budget amount"
