@@ -1,13 +1,49 @@
 {
+  "auth": {
+    "dateOfBirth": "Data urodzenia",
+    "email": "Email",
+    "login": {
+      "submit": "Zaloguj się",
+      "title": "Logowanie"
+    },
+    "password": "Hasło",
+    "register": {
+      "login": "Login",
+      "submit": "Zarejestruj się",
+      "title": "Rejestracja"
+    }
+  },
+  "chart": {
+    "budget": {
+      "average": "Średnia miesięczna wartość założonego budżetu"
+    },
+    "transaction": {
+      "average": "Średnia miesięczna ilość transakcji"
+    }
+  },
+  "dashboard": {
+    "transaction": {
+      "amount": "Kwota",
+      "category": "Kategoria",
+      "description": "Opis",
+      "expense": "Wydatek",
+      "id": "Id",
+      "income": "Przychód",
+      "type": "Typ"
+    },
+    "transactions": "Transakcje"
+  },
+  "error": {
+    "login": "Wystąpił błąd podczas logowania. Upewnij się, że login i hasło są poprawne"
+  },
   "home": {
     "appDescription": "Twoje rozwiązanie na lepsze zarządzanie pieniędzmi",
     "joinUs": "Dołącz do nas"
   },
   "nav": {
+    "changeLanguage": "Polski",
     "login": "Zaloguj się",
-    "logout": "Wyloguj się"
-  },
-  "error": {
-    "login": "Wystąpił błąd podczas logowania. Upewnij się, że login i hasło są poprawne"
+    "logout": "Wyloguj się",
+    "register": "Zarejestruj się"
   }
 }

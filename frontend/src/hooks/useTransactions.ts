@@ -10,11 +10,11 @@ export const useTransactions = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [error, setError] = useState<string>();
 
-  const fetchTransactions = async () => {
+  const fetchTransactions = async (id?: number) => {
     try {
       setError(undefined);
       setLoading(true);
-      const { data } = await axiosInstance.get<Transaction[]>(Envs.apiUrl + '/transaction');
+      const { data } = await axiosInstance.get<Transaction[]>(Envs.apiUrl + '/transaction' + (id ? `?id=${id}` : ''));
       setTransactions(data);
       setLoading(false);
     } catch (ex) {

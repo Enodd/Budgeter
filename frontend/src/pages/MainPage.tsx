@@ -9,7 +9,7 @@ export const MainPage: React.FC = () => {
     if (isAuthenticated) {
       navigate("/dashboard");
     } else {
-      navigate("/login")
+      navigate("/auth/login")
     }
   }, [])
   return <></>

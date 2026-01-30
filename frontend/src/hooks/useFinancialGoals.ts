@@ -10,11 +10,11 @@ export const useFinancialGoals = () => {
   const [financialGoals, setFinancialGoals] = useState<FinancialGoalDto[]>([]);
   const [error, setError] = useState<string>();
 
-  const fetchGoals = async () => {
+  const fetchGoals = async (id?: number) => {
     try {
       setError(undefined);
       setLoading(true);
-      const { data } = await axiosInstance.get<FinancialGoalDto[]>(Envs.apiUrl + '/financial_goals');
+      const { data } = await axiosInstance.get<FinancialGoalDto[]>(Envs.apiUrl + '/finantial_goals' + (id ? `?id=${id}` : ''));
       setFinancialGoals(data);
       setLoading(false);
     } catch (ex) {
@@ -27,7 +27,7 @@ export const useFinancialGoals = () => {
   const updateFinancialGoal = async (requestBody: FinancialGoalDto) => {
     try {
       setLoading(true);
-      const { data, status} = await axiosInstance.put<FinancialGoalDto>(Envs.apiUrl + '/financial_goals', {
+      const { data, status} = await axiosInstance.put<FinancialGoalDto>(Envs.apiUrl + '/finantial_goals', {
         ...requestBody
       });
       
@@ -47,7 +47,7 @@ export const useFinancialGoals = () => {
   const createFinancialGoal = async (requestBody: FinancialGoalDto) => {
     try {
       setLoading(true);
-      const { data, status} = await axiosInstance.post<FinancialGoalDto>(Envs.apiUrl + '/financial_goals', {
+      const { data, status} = await axiosInstance.post<FinancialGoalDto>(Envs.apiUrl + '/finantial_goals', {
         ...requestBody
       });
       
@@ -66,7 +66,7 @@ export const useFinancialGoals = () => {
   const deleteFinancialGoal = async (financialGoalId: number) => {
     try {
       setLoading(true);
-      const { status } = await axiosInstance.post(Envs.apiUrl + '/financial_goals', {
+      const { status } = await axiosInstance.post(Envs.apiUrl + '/finantial_goals', {
         id: financialGoalId
       });
       

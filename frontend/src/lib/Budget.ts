@@ -1,4 +1,5 @@
 import { BigDecimal } from "./additionalTypes/BigDecimal";
+import { Transaction } from "./Transaction";
 
 export interface BudgetDto {
   id?: number | null;
@@ -6,6 +7,7 @@ export interface BudgetDto {
   periodStart?: string | null;
   periodEnd?: string | null;
   totalLimit?: BigDecimal | null;
+  transactions?: Transaction[] | null;
 }
 
 export interface BudgetRequest {

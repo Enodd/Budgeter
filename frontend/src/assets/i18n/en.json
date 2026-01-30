@@ -1,13 +1,49 @@
 {
+  "auth": {
+    "dateOfBirth": "Date of birth",
+    "email": "Email",
+    "login": {
+      "submit": "Login",
+      "title": "Login"
+    },
+    "password": "Password",
+    "register": {
+      "login": "Login",
+      "submit": "Register",
+      "title": "Register"
+    }
+  },
+  "chart": {
+    "budget": {
+      "average": "Average monthly budget amount"
+    },
+    "transaction": {
+      "average": "Average amount of transactions per month"
+    }
+  },
+  "dashboard": {
+    "transaction": {
+      "amount": "Amount",
+      "category": "Category",
+      "description": "Description",
+      "expense": "Expense",
+      "id": "Id",
+      "income": "Income",
+      "type": "Type"
+    },
+    "transactions": "Transactions"
+  },
+  "error": {
+    "login": "An error occured while trying to log you in. Check you email and password"
+  },
   "home": {
     "appDescription": "Your money management done right.",
     "joinUs": "Join us"
   },
   "nav": {
+    "changeLanguage": "English",
     "login": "Login",
-    "logout": "Logout"
-  },
-  "error": {
-    "login": "An error occured while trying to log you in. Check you email and password"
+    "logout": "Logout",
+    "register": "Register"
   }
 }

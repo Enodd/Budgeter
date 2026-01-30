@@ -1,7 +1,10 @@
+import { Grid } from "@mui/material";
 import LoginForm from "../../components/LoginForm";
 
 export default function LoginPage() {
     return (
-      <LoginForm />
+        <Grid container justifyContent={'center'} alignItems={'center'} height="90vh" maxHeight={'100%'}>
+        <LoginForm />
+      </Grid>
     );
 }

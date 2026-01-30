@@ -1,4 +1,4 @@
-import { useState } from "react"
+import {useEffect, useState} from "react"
 import { BudgetDto, BudgetRequest, BudgetUpdateRequest } from "../lib/Budget";
 import axiosInstance from '../services/axiosService';
 import { Envs } from "../lib/envs";
@@ -7,13 +7,15 @@ export const useBudgets = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [budgets, setBudgets] = useState<BudgetDto[]>([]);
 
-  const fetchBudgets = async () => {
+  const fetchBudgets = async (id?: number) => {
     try {
       setLoading(true);
-      const { data } = await axiosInstance.get<BudgetDto[]>(Envs.apiUrl + '/budgets');
+      const { data } = await axiosInstance.get<BudgetDto[]>(Envs.apiUrl + '/budgets' + (id ? `?id=${id}` : ''));
       setBudgets(data);
       setLoading(false);
+      return data;
     } catch (ex) {
+      console.log(ex)
       setBudgets([]);
     } finally {
       setLoading(false);
@@ -76,6 +78,14 @@ export const useBudgets = () => {
       setLoading(false);
     }
   }
+  
+  const refresh = async () => {
+    await fetchBudgets()
+  }
+  
+  useEffect(() => {
+    refresh()
+  }, []);
 
-  return { fetchBudgets, updateBudget, createBudget, deleteBudget, budgets, loading }
+  return { fetchBudgets, updateBudget, createBudget, deleteBudget, budgets, loading, refresh }
 }

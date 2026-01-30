@@ -1,26 +1,27 @@
 import { BarChart } from "@mui/x-charts";
-import { Transaction } from "../../lib/Transaction";
+import { FinancialGoalDto } from "../../lib/FinancialGoal";
 import { averageByPeriod } from "../../utils/averagePeriodHelper";
 import { useTranslation } from "react-i18next";
 
 interface Props {
-  data: Transaction[];
+  data: FinancialGoalDto[];
   period: "month" | "year";
 }
 
-export function TransactionChart({ data, period }: Props) {
+export function FinancialGoalChart({ data, period }: Props) {
   const { t } = useTranslation();
+
   const chartData = averageByPeriod(
     data,
-    t => t.transactionDate,
-    t => Number(t.amount ?? 0),
+    g => g.deadline,
+    g => Number(g.currentAmount ?? 0),
     period
   );
 
   return (
     <BarChart
       xAxis={[{ scaleType: "band", data: chartData.map(d => d.label) }]}
-      series={[{ data: chartData.map(d => d.value), label: t('chart.transaction.average') }]}
+      series={[{ data: chartData.map(d => d.value), label: t('chart.financialGoal.currentAmount.average') }]}
       height={300}
     />
   );

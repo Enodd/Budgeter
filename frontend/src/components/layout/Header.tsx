@@ -1,52 +1,64 @@
-import { useTranslation } from "react-i18next";
-import { useAuth } from "../../stores/authStore.tsx";
-import { Link } from "react-router-dom";
+import {useTranslation} from "react-i18next";
+import {useAuth} from "../../stores/authStore.tsx";
+import {useNavigate} from "react-router-dom";
+import {Button, Grid, Typography} from "@mui/material";
 
 export default function Header() {
-  const { isAuthenticated } = useAuth();
-  const { t, i18n: { changeLanguage, language } } = useTranslation();
-
-  function handleLanguageToggle() {
-    changeLanguage(language === 'pl' ? 'en' : 'pl');
+  const navigate = useNavigate();
+  const {isAuthenticated, logout} = useAuth();
+  const {t, i18n: {changeLanguage, language}} = useTranslation();
+  
+  async function handleLanguageToggle() {
+    await changeLanguage(language === 'pl' ? 'en' : 'pl');
   }
-
+  
+  async function handleLogout() {
+    logout('');
+    navigate('/')
+  }
+  
   return (
-    <header className="flex justify-between items-center p-4 fixed top-0 w-screen">
-      <Link to='/'>
-        <h1 className="text-2xl font-bold">Budgeter</h1>
-      </Link>
-      <nav className="relative">
-        <ul className="flex items-center gap-2 list-none">
-          {isAuthenticated ? (
-            <li>
-              <a href="/logout">
-                {t('nav.logout')}
-              </a>
-            </li>
-          ) : (
-            <>
-            <li>
-              <a href="/auth/login">
+    <Grid container
+          p={2}
+          justifyContent={'space-between'}
+          sx={{minWidth: '100vw'}}>
+      <Grid size={6}>
+        <Typography variant={"h1"} fontSize={'x-large'}>
+          Budgeter
+        </Typography>
+      </Grid>
+      <Grid container size={6} gap={2} justifyContent={'flex-end'}>
+        <Grid size={"auto"}>
+          <Button
+            variant={'outlined'}
+            onClick={handleLanguageToggle}>
+            {t('nav.changeLanguage')}
+          </Button>
+        </Grid>
+        {!isAuthenticated
+          ? <>
+            <Grid size={'auto'}>
+              <Button
+                variant={'contained'}
+                onClick={() => navigate('/auth/login')}>
                 {t('nav.login')}
-              </a>
-            </li>
-            <li>
-              <Link to="/register">
+              </Button>
+            </Grid>
+            <Grid size={'auto'}>
+              <Button
+                variant={'contained'}
+                onClick={() => navigate('/auth/register')}>
                 {t('nav.register')}
-              </Link>
-            </li>
-            </>
-          )}
-          <li>
-            <button
-              className="bg-primary-main p-2 rounded-sm"
-              onClick={handleLanguageToggle}
-            >
-              {t('nav.changeLanguage')}
-            </button>
-          </li>
-        </ul>
-      </nav>
-    </header>
+              </Button>
+            </Grid>
+          </>
+          : <Grid size={'auto'}>
+            <Button variant={'contained'} color={'secondary'} onClick={handleLogout}>
+              {t('nav.logout')}
+            </Button>
+          </Grid>
+        }
+      </Grid>
+    </Grid>
   );
 }
