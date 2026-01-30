@@ -3,6 +3,7 @@ package com.example.budgeter.controller;
 import com.example.budgeter.dto.budget.BudgetDto;
 import com.example.budgeter.dto.budget.BudgetRequest;
 import com.example.budgeter.dto.budget.BudgetUpdateRequest;
+import com.example.budgeter.dto.budget.BudgetWithTransactions;
 import com.example.budgeter.service.BudgetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class BudgetsController {
 
     private final BudgetService budgetService;
 
-    @GetMapping("/")
+    @GetMapping()
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<BudgetDto>> getAllBudgets(@AuthenticationPrincipal UserDetails userDetails) {
         String mail = userDetails.getUsername();
@@ -32,11 +33,11 @@ public class BudgetsController {
 
     @GetMapping(params = "id")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<BudgetDto> getBudget(@RequestParam int id) {
+    public ResponseEntity<BudgetWithTransactions> getBudget(@RequestParam int id) {
         return ResponseEntity.ok(budgetService.getBudget(id));
     }
 
-    @PostMapping("/")
+    @PostMapping()
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<BudgetDto> createBudget(
             @AuthenticationPrincipal UserDetails userDetails,
@@ -46,13 +47,13 @@ public class BudgetsController {
         return ResponseEntity.ok(budgetService.addBudget(mail, budgetRequest));
     }
 
-    @PutMapping("/")
+    @PutMapping()
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<BudgetDto> updateBudget(@RequestBody BudgetUpdateRequest budgetRequest) {
         return  ResponseEntity.ok(budgetService.updateBudget(budgetRequest));
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping()
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> deleteBudget(@RequestParam int id) {
         budgetService.deleteBudget(id);

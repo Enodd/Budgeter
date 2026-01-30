@@ -1,18 +1,16 @@
 package com.example.budgeter.service;
 
 import com.example.budgeter.dto.budget.BudgetCategoryDto;
+import com.example.budgeter.dto.budget.BudgetDto;
 import com.example.budgeter.dto.transaction.TransactionDto;
 import com.example.budgeter.dto.transaction.TransactionRequest;
 import com.example.budgeter.dto.transaction.TransactionUpdateRequest;
 import com.example.budgeter.entity.Transaction;
 import com.example.budgeter.repository.CategoryRepository;
 import com.example.budgeter.repository.TransactionRepository;
-import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -24,6 +22,8 @@ public class TransactionService {
 
   private TransactionDto toDto(Transaction t) {
     var bc = t.getBudgetCategory();
+    var budget = t.getBudget();
+
     return new TransactionDto(
       t.getId(),
       t.getAmount(),
@@ -37,6 +37,13 @@ public class TransactionService {
         bc.getSpentAmount(),
         bc.getLimitAmount(),
         bc.getColor()
+      ),
+      new BudgetDto(
+        budget.getId(),
+        budget.getName(),
+        budget.getPeriodStart(),
+        budget.getPeriodEnd(),
+        budget.getTotalLimit()
       )
     );
   }

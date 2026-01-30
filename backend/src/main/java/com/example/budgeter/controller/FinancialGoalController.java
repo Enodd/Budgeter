@@ -5,7 +5,6 @@ import com.example.budgeter.dto.financial.FinancialGoalRequest;
 import com.example.budgeter.repository.UserRepository;
 import com.example.budgeter.service.FinancialGoalService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,7 +22,7 @@ public class FinancialGoalController {
   private final FinancialGoalService financialGoalService;
   private final UserRepository userRepository;
 
-  @GetMapping("/")
+  @GetMapping()
   @PreAuthorize("isAuthenticated()")
   public ResponseEntity<List<FinancialGoalDto>> getGoals(
     @AuthenticationPrincipal UserDetails userDetails
@@ -39,7 +38,7 @@ public class FinancialGoalController {
     return ResponseEntity.ok(financialGoalService.getGoal(id));
   }
 
-  @PostMapping("/")
+  @PostMapping()
   @PreAuthorize("isAuthenticated()")
   public ResponseEntity<FinancialGoalDto> createGoal(@RequestBody FinancialGoalRequest request) {
     return ResponseEntity.ok(
@@ -47,7 +46,7 @@ public class FinancialGoalController {
     );
   }
 
-  @PutMapping("/")
+  @PutMapping()
   @PreAuthorize("isAuthenticated()")
   public ResponseEntity<FinancialGoalDto> updateGoal(@RequestBody FinancialGoalDto request) {
     System.out.println("Request: "+request);

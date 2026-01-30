@@ -1,7 +1,7 @@
 package com.example.budgeter.dto.transaction;
 
 import com.example.budgeter.dto.budget.BudgetCategoryDto;
-import com.example.budgeter.entity.BudgetCategory;
+import com.example.budgeter.dto.budget.BudgetDto;
 import jakarta.annotation.Nullable;
 
 import java.math.BigDecimal;
@@ -13,6 +13,7 @@ public record TransactionDto(
   @Nullable String description,
   LocalDate transactionDate,
   String type,
-  BudgetCategoryDto budgetCategoryId
+  @Nullable BudgetCategoryDto budgetCategory,
+  @Nullable BudgetDto budget
 ) {
 }

@@ -20,20 +20,20 @@ public class BudgetCategoryController {
   private final BudgetCategoryService budgetCategoryService;
   private final BudgetRepository budgetRepository;
 
-  @GetMapping("/")
+  @GetMapping()
   @PreAuthorize("isAuthenticated()")
   public ResponseEntity<List<BudgetCategoryDto>> getCategories() {
     var categories = budgetCategoryService.getCategories();
     return ResponseEntity.ok(categories);
   }
-//
+
   @GetMapping(params = "id")
   @PreAuthorize("isAuthenticated()")
   public ResponseEntity<BudgetCategoryDto> getCategoryById(@RequestParam int id) {
     return ResponseEntity.ok(budgetCategoryService.getCategory(id));
   }
 
-  @PostMapping("/")
+  @PostMapping()
   @PreAuthorize("isAuthenticated()")
   public ResponseEntity<Void> createCategory(
     @RequestBody BudgetCategoryRequest request
@@ -42,14 +42,14 @@ public class BudgetCategoryController {
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
-  @PutMapping("/")
+  @PutMapping()
   @PreAuthorize("isAuthenticated()")
   public ResponseEntity<Void> updateCategory(@RequestBody BudgetCategoryDto budgetCategoryRequest) {
     budgetCategoryService.updateCategory(budgetCategoryRequest);
     return ResponseEntity.status(HttpStatus.OK).build();
   }
 
-  @DeleteMapping("/")
+  @DeleteMapping()
   @PreAuthorize("isAuthenticated()")
   public ResponseEntity<Void> deleteCategory(@RequestParam int id) {
     budgetCategoryService.deleteCategory(id);

@@ -21,14 +21,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
+    @GetMapping()
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<UserDto> getUser(@AuthenticationPrincipal UserDetails userDetails) {
         String mail = userDetails.getUsername();
         return ResponseEntity.ok(userService.getUser(mail));
     }
 
-    @PutMapping("/")
+    @PutMapping()
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> updateUser(
       @RequestBody UserUpdateRequest request

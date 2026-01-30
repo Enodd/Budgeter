@@ -27,6 +27,10 @@ public class Transaction {
   @JoinColumn(name = "budget_category_id")
   private BudgetCategory budgetCategory;
 
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "budget_id")
+  private Budget budget;
+
   @NotNull
   @Column(name = "amount", nullable = false, precision = 12, scale = 2)
   private BigDecimal amount;

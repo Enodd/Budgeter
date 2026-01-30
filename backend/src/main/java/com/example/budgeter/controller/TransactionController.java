@@ -24,7 +24,7 @@ public class TransactionController {
     private final TransactionService transactionService;
     private final UserRepository userRepository;
 
-    @GetMapping("/")
+    @GetMapping()
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<TransactionDto>> getTransactions(
             @AuthenticationPrincipal UserDetails userDetails
@@ -43,7 +43,7 @@ public class TransactionController {
         return ResponseEntity.ok(transactionService.getTransaction(id));
     }
 
-    @PostMapping("/")
+    @PostMapping()
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<TransactionDto> createTransaction(
         @RequestBody TransactionRequest transaction
@@ -51,7 +51,7 @@ public class TransactionController {
         return ResponseEntity.ok(transactionService.addTransaction(transaction));
     }
 
-    @PutMapping("/")
+    @PutMapping()
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<TransactionDto> updateTransaction(@RequestBody TransactionUpdateRequest transactionRequest) {
         return ResponseEntity.ok(transactionService.updateTransaction(transactionRequest));
